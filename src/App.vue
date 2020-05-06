@@ -1,13 +1,18 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div class="app">
+    <Nav />
+    <div class="timer">
+      <router-view />
     </div>
-    <router-view />
   </div>
 </template>
+<script>
+import Nav from '@/components/Nav'
 
+export default {
+  components: { Nav }
+}
+</script>
 <style lang="stylus">
 html
   font-family Avenir, Helvetica, Arial, sans-serif
@@ -24,4 +29,13 @@ html
 
 body
   font-size: font-size
+
+.app
+  display flex
+  flex-direction column
+  color color-text-primary
+  .nav
+    height 9vh
+  .timer
+    height 91vh
 </style>
