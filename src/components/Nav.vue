@@ -37,8 +37,8 @@ y = .6rem
 
 .nav
   display flex
-  padding box-padding
   justify-content flex-end
+  align-items center
   background-color #bbb
   &__button
     display: flex;
@@ -46,7 +46,7 @@ y = .6rem
     justify-content: space-between;
     height: 1.9rem;
     width: 2.8rem;
-    margin: 1rem;
+    margin: 2rem;
     &-line
       height: .3rem;
       background-color color-text-primary
