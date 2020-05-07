@@ -1,28 +1,31 @@
 <template>
-  <div class="workout">
-    <div class="serie">
-      1 / 5
+  <div class="workout" @click="playOrPause">
+    <div class="workout__serie">{{ currentSerie }} / {{ totalSeries }}</div>
+    <div class="workout__time">
+      {{ minutes | unitTime }}:{{ seconds | unitTime }}
     </div>
-    <div class="time">
-      01:00
-    </div>
-    <div class="workout__state" @click="playOrPause">
-      <div class="workout__state-button">
-        <previous-icon />
-      </div>
-      <div v-show="!playing" class="workout__state-button">
+    <div class="workout__play">
+      <div v-show="!playing" class="workout__play-button">
         <play-icon />
       </div>
-      <div v-show="playing" class="workout__state-button">
+      <div v-show="playing" class="workout__play-button">
         <pause-icon />
       </div>
-      <div class="workout__state-button">
+    </div>
+    <div class="workout__move">
+      <div v-if="showPrevious" @click.stop="previous">
+        <previous-icon />
+      </div>
+      <div v-else>&nbsp;</div>
+      <div v-if="showNext" @click.stop="next">
         <next-icon />
       </div>
+      <div v-else>&nbsp;</div>
     </div>
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex'
 import PlayIcon from '@/components/icons/PlayIcon'
 import PauseIcon from '@/components/icons/PauseIcon'
 import PreviousIcon from '@/components/icons/PreviousIcon'
@@ -30,14 +33,37 @@ import NextIcon from '@/components/icons/NextIcon'
 
 export default {
   components: { PlayIcon, PauseIcon, PreviousIcon, NextIcon },
-  data() {
-    return {
-      playing: false
+  methods: {
+    ...mapMutations({
+      playOrPause: 'playOrPause',
+      next: 'next',
+      previous: 'previous'
+    })
+  },
+  computed: {
+    ...mapState(['serie', 'time', 'playing']),
+    currentSerie() {
+      return this.serie[0]
+    },
+    totalSeries() {
+      return this.serie[1]
+    },
+    minutes() {
+      return this.time[0]
+    },
+    seconds() {
+      return this.time[1]
+    },
+    showPrevious() {
+      return this.currentSerie > 1
+    },
+    showNext() {
+      return this.currentSerie < this.totalSeries
     }
   },
-  methods: {
-    playOrPause() {
-      this.playing = !this.playing
+  filters: {
+    unitTime(val) {
+      return new String(val).padStart(2, '0')
     }
   }
 }
@@ -46,16 +72,20 @@ export default {
 .workout
   display flex
   flex-direction column
-  justify-content space-evenly
+  justify-content space-between
   align-items center
   height 100%
   padding 1rem
   background-color #ddd
   font-size: 10rem
-  .time
+
+  &__time
     font-weight 600
-  &__state
+
+  &__play
     display flex
+    justify-content center
+    width 100%
     &-button
       display: flex
       justify-content: center
@@ -64,4 +94,9 @@ export default {
       width: 12rem
       border: 0.3rem solid
       border-radius: 50%
+
+  &__move
+    display flex
+    justify-content space-between
+    width 100%
 </style>
