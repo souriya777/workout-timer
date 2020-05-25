@@ -1,6 +1,7 @@
 <template>
   <div class="app">
     <Nav />
+    <Menu />
     <div class="timer">
       <router-view />
     </div>
@@ -8,9 +9,10 @@
 </template>
 <script>
 import Nav from '@/components/Nav'
+import Menu from '@/components/Menu'
 
 export default {
-  components: { Nav }
+  components: { Nav, Menu }
 }
 </script>
 <style lang="stylus">
@@ -35,7 +37,14 @@ body
   flex-direction column
   color color-text-primary
   .nav
-    height 9vh
+    z-index 1
+    height height-nav
+  .menu
+    position absolute
+    top: height-nav
+    right 0
+    height height-content
+    width 100%
   .timer
-    height 91vh
+    height height-content
 </style>

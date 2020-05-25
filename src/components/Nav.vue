@@ -8,22 +8,20 @@
   </nav>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 export default {
-  data() {
-    return {
-      opened: false
-    }
-  },
   methods: {
-    switchMenu() {
-      this.opened = !this.opened
-    }
+    ...mapMutations({
+      switchMenu: 'switchMenu'
+    })
   },
   computed: {
+    ...mapState(['menuOpened']),
     navButtonClass() {
       return {
         nav__button: true,
-        'nav__button--opened': this.opened
+        'nav__button--opened': this.menuOpened
       }
     }
   }
@@ -39,7 +37,7 @@ y = .6rem
   display flex
   justify-content flex-end
   align-items center
-  background-color #bbb
+  background-color color-bg-primary
   &__button
     display: flex;
     flex-direction: column;

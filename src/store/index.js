@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     serie: [1, 5],
     time: [1, 0],
-    playing: false
+    playing: false,
+    menuOpened: false
   },
   mutations: {
     playOrPause(state) {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     decrement({ time: [minutes, seconds] }) {
       console.log(minutes, seconds)
+    },
+    switchMenu(state) {
+      state.menuOpened = !state.menuOpened
     }
   }
 })
