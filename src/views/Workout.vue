@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import PlayIcon from '@/components/icons/PlayIcon'
 import PauseIcon from '@/components/icons/PauseIcon'
 import PreviousIcon from '@/components/icons/PreviousIcon'
@@ -35,9 +35,11 @@ export default {
   components: { PlayIcon, PauseIcon, PreviousIcon, NextIcon },
   methods: {
     ...mapMutations({
-      playOrPause: 'playOrPause',
       next: 'next',
       previous: 'previous'
+    }),
+    ...mapActions({
+      playOrPause: 'playOrPause'
     })
   },
   computed: {
