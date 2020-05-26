@@ -35,7 +35,7 @@ body
 .app
   display flex
   flex-direction column
-  color color-text-primary
+  color color-txt-primary
   .nav
     z-index 1
     height height-nav

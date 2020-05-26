@@ -6,8 +6,19 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Workout',
+    name: 'workout',
     component: () => import('../views/Workout')
+  },
+  {
+    path: '/edit',
+    name: 'edit',
+    component: () => import('../views/Edit'),
+    props: true
+  },
+  {
+    path: '/reset',
+    name: 'reset',
+    component: () => import('../views/Reset')
   }
 ]
 

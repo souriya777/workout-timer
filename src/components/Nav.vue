@@ -47,7 +47,7 @@ y = .6rem
     margin: 2rem;
     &-line
       height: .3rem;
-      background-color color-text-primary
+      background-color color-txt-primary
       transition all animation
     &--opened &-line:nth-child(1)
       transform rotate(rot) translate(x, y)

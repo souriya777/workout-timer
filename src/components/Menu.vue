@@ -2,13 +2,15 @@
   <div :class="menuClass">
     <div class="menu__bg"></div>
     <ul class="menu__list">
+      <li class="menu__item" @click="goToHome">home</li>
       <li class="menu__item" @click="goToEdit">edit</li>
       <li class="menu__item" @click="goToReset">reset</li>
     </ul>
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
+
 export default {
   props: {
     opened: {
@@ -18,11 +20,19 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['switchMenu']),
+    goTo(routeName) {
+      this.switchMenu()
+      this.$router.push({ name: routeName })
+    },
+    goToHome() {
+      this.goTo('workout')
+    },
     goToEdit() {
-      console.log('edit')
+      this.goTo('edit')
     },
     goToReset() {
-      console.log('reset')
+      this.goTo('reset')
     }
   },
   computed: {
@@ -67,7 +77,9 @@ animation-txt = ease 350ms
     list-style none
   &__item
     margin-bottom 4rem
-
+    > a
+      color color-txt-primary
+      text-decoration none
 .menu--opened
   z-index 1
   .menu__bg
@@ -75,6 +87,6 @@ animation-txt = ease 350ms
     transition all animation-bg
   .menu__list
     z-index 1
-    color color-text-primary
+    color color-txt-primary
     transition color animation-txt
 </style>
