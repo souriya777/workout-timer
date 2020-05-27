@@ -126,5 +126,6 @@ export default {
     margin 0 auto
     & > input
       display inline
+      width 6rem
       text-align center
 </style>

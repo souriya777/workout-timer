@@ -107,12 +107,14 @@ export default {
       fill transparent
 
   &__auto
-    border .1rem solid
+    border .1rem solid color-txt-secondary
     border-radius .5rem
     padding 0rem .3rem
+    color color-txt-secondary
     font-size 1.7rem
     font-weight 600
     &--active
-      border .3rem solid
-      background-color alpha(color-bg-primary, .9)
+      border .3rem solid color-action
+      // background-color alpha(color-action, .6)
+      color color-txt-secondary
 </style>
