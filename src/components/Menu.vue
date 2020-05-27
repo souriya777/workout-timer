@@ -50,8 +50,8 @@ export default {
 }
 </script>
 <style lang="stylus">
-animation-bg = ease 250ms
-animation-txt = ease 350ms
+animation-bg = ease 350ms
+animation-txt = ease 50ms
 
 .menu
   z-index -1
@@ -59,6 +59,8 @@ animation-txt = ease 350ms
   justify-content center
   align-items center
   overflow hidden
+  transition all animation-bg
+
   &__bg
     position absolute
     top 0
@@ -70,6 +72,7 @@ animation-txt = ease 350ms
     background-color color-bg-primary
     transform translate(4rem, -18rem)
     transition all animation-bg
+
   &__list
     padding 0
     color transparent
@@ -78,16 +81,20 @@ animation-txt = ease 350ms
     font-weight 600
     text-align center
     list-style none
+
   &__item
     margin-bottom 4rem
     > a
       color color-txt-primary
       text-decoration none
+
 .menu--opened
   z-index 1
+
   .menu__bg
     transform translate(6rem, -5rem) scale(20)
     transition all animation-bg
+
   .menu__list
     z-index 1
     color color-txt-primary

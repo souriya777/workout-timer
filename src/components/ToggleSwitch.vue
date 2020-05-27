@@ -45,7 +45,7 @@ export default {
     left 0
     right 0
     border-radius 1rem
-    background-color color-bg-primary
+    background-color color-bg-input-inactive
     cursor pointer
 
     &:before
@@ -56,15 +56,15 @@ export default {
       width 2rem
       border-radius 50%
       content ""
-      background-color color-txt-secondary
+      background-color color-txt-primary
       transition all .4s
 
   // slider effect
   &__input:checked + &__slider
-    background-color color-bg-secondary
+    background-color color-action
 
   &__input:focus + &__slider
-    box-shadow 0 0 4px color-bg-secondary
+    box-shadow 0 0 4px color-action
 
   &__input:checked + &__slider:before
     transform: translateX(2.1rem)

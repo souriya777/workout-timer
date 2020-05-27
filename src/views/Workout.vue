@@ -87,6 +87,8 @@ export default {
     display flex
     justify-content center
     width 100%
+    color color-action
+    fill color-action
     &-button
       display flex
       justify-content center

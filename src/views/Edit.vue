@@ -100,8 +100,8 @@ export default {
       border-radius .5rem
       border-color inherit
       padding .6rem 7rem
-      background-color color-bg-secondary
-      color color-txt-secondary
+      background-color color-action
+      color color-txt-primary
 
   &__group
     margin-bottom 3rem

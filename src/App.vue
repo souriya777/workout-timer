@@ -3,7 +3,9 @@
     <Nav />
     <Menu />
     <div class="timer">
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
@@ -49,5 +51,12 @@ body
     height height-content
     > div
       height 100%
-      background-color #ddd
+      background-color color-bg-secondary
+      color color-txt-secondary
+
+// transition effects
+.fade-enter-active, .fade-leave-active
+  transition: opacity 100ms ease
+.fade-enter, .fade-leave-to
+  opacity: 0;
 </style>
