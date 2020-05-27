@@ -16,6 +16,9 @@ export default new Vuex.Store({
     _intervalId: null
   },
   mutations: {
+    setCurrentSerie({ serie }, currentSerie) {
+      Vue.set(serie, 0, currentSerie)
+    },
     setTotalSerie({ serie }, nbSerie) {
       Vue.set(serie, 1, nbSerie)
     },
@@ -127,6 +130,14 @@ export default new Vuex.Store({
     switchMenu({ commit, state }) {
       commit('switchMenu', !state.menuOpened)
       commit('pause')
+    },
+    resetWorkout({ commit, state }) {
+      const {
+        refTime: [min, sec]
+      } = state
+      commit('pause')
+      commit('setCurrentSerie', 1)
+      commit('setTime', [min, sec])
     }
   }
 })

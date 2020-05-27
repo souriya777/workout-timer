@@ -14,11 +14,6 @@ const routes = [
     name: 'edit',
     component: () => import('../views/Edit'),
     props: true
-  },
-  {
-    path: '/reset',
-    name: 'reset',
-    component: () => import('../views/Reset')
   }
 ]
 
