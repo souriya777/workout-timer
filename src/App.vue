@@ -34,6 +34,10 @@ html
 body
   font-size font-size
 
+h1
+  font-size 2rem !important
+  margin 0 !important
+
 .app
   display flex
   flex-direction column
