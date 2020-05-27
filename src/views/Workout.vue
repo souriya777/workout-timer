@@ -88,9 +88,7 @@ export default {
   flex-direction column
   justify-content space-between
   align-items center
-  height 100%
   padding 1rem
-  background-color #ddd
   font-size 10rem
 
   &__time

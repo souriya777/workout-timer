@@ -47,4 +47,7 @@ body
     width 100%
   .timer
     height height-content
+    > div
+      height 100%
+      background-color #ddd
 </style>
