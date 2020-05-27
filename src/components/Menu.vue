@@ -2,7 +2,7 @@
   <div :class="menuClass">
     <div class="menu__bg"></div>
     <ul class="menu__list">
-      <li class="menu__item" @click="goToHome">home</li>
+      <li class="menu__item" @click="goToWorkout">work 💪</li>
       <li class="menu__item" @click="goToEdit">edit</li>
       <li class="menu__item" @click="goToReset">reset</li>
     </ul>
@@ -25,7 +25,7 @@ export default {
       this.switchMenu()
       this.$router.push({ name: routeName })
     },
-    goToHome() {
+    goToWorkout() {
       this.goTo('workout')
     },
     goToEdit() {

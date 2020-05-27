@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-Vue.use(Vuex)
+import { DEFAULT_MIN, DEFAULT_SEC } from '@/utils/TimerUtils'
 
-const DEFAULT_MIN = 0
-const DEFAULT_SEC = 3
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
@@ -52,8 +51,8 @@ export default new Vuex.Store({
       // when time+serie finished, stop
       if (current === total && m === 0 && s === 1) {
         clearInterval(_intervalId)
-        newSec = 0
         state.playing = false
+        newSec = 0
       }
       // when time finished, next serie
       else if (m === 0 && s === 1) {
@@ -61,16 +60,21 @@ export default new Vuex.Store({
         newMin = DEFAULT_MIN
         newSec = DEFAULT_SEC
 
+        // if not autoplay, stop
         if (!auto) {
           clearInterval(_intervalId)
           state.playing = false
         }
-      } else {
-        // nominal case
+      }
+      // nominal case
+      else {
+        // next minute
         if (m > 0 && s === 0) {
           newMin--
           newSec = 59
-        } else {
+        }
+        // next second
+        else {
           newSec--
         }
       }
