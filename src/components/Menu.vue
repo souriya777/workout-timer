@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   props: {
@@ -20,10 +20,12 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['switchMenu']),
+    ...mapActions(['switchMenu']),
     goTo(routeName) {
       this.switchMenu()
-      this.$router.push({ name: routeName })
+      // vue-router issue :
+      // https://github.com/vuejs/vue-router/issues/2872
+      this.$router.push({ name: routeName }).catch(() => {})
     },
     goToWorkout() {
       this.goTo('workout')

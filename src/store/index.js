@@ -9,17 +9,33 @@ export default new Vuex.Store({
   state: {
     serie: [1, 5],
     time: [DEFAULT_MIN, DEFAULT_SEC],
+    refTime: [DEFAULT_MIN, DEFAULT_SEC],
     playing: false,
     auto: false,
     menuOpened: false,
     _intervalId: null
   },
   mutations: {
+    setTotalSerie({ serie }, nbSerie) {
+      Vue.set(serie, 1, nbSerie)
+    },
+    setTime({ time }, [min, sec]) {
+      Vue.set(time, 0, min)
+      Vue.set(time, 1, sec)
+    },
+    setRefTime({ refTime }, [min, sec]) {
+      Vue.set(refTime, 0, min)
+      Vue.set(refTime, 1, sec)
+    },
+    setAuto(state, auto) {
+      state.auto = auto
+    },
     play(state) {
       state.playing = true
     },
     pause(state) {
       state.playing = false
+      clearInterval(state._intervalId)
     },
     next(state) {
       const [current, total] = state.serie
@@ -36,10 +52,6 @@ export default new Vuex.Store({
         Vue.set(serie, 0, newSerie)
         state.time = [DEFAULT_MIN, DEFAULT_SEC]
       }
-    },
-    switchAuto(state) {
-      console.log('switchAuto', state.auto)
-      state.auto = !state.auto
     },
     tick(state) {
       const { time, serie, auto, _intervalId } = state
@@ -81,20 +93,19 @@ export default new Vuex.Store({
 
       state.time = [newMin, newSec]
     },
-    switchMenu(state) {
-      state.menuOpened = !state.menuOpened
-    },
     setIntervalId(state, { intervalId }) {
       state._intervalId = intervalId
+    },
+    switchMenu(state, menuOpened) {
+      state.menuOpened = menuOpened
     }
   },
   actions: {
     playOrPause({ commit, state }) {
-      const { playing, _intervalId } = state
+      const { playing } = state
 
       if (playing) {
         commit('pause')
-        clearInterval(_intervalId)
       } else {
         commit('play')
         const intervalId = setInterval(() => {
@@ -102,6 +113,20 @@ export default new Vuex.Store({
         }, 1000)
         commit('setIntervalId', { intervalId })
       }
+    },
+    saveSettings({ commit }, settings) {
+      const { nbSerie, min, sec, auto } = settings
+      commit('setTotalSerie', nbSerie)
+      commit('setTime', [min, sec])
+      commit('setRefTime', [min, sec])
+      commit('setAuto', auto)
+    },
+    switchAuto({ commit, state }) {
+      commit('setAuto', !state.auto)
+    },
+    switchMenu({ commit, state }) {
+      commit('switchMenu', !state.menuOpened)
+      commit('pause')
     }
   }
 })

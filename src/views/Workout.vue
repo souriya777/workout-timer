@@ -39,14 +39,8 @@ import NextIcon from '@/components/icons/NextIcon'
 export default {
   components: { PlayIcon, PauseIcon, PreviousIcon, NextIcon },
   methods: {
-    ...mapMutations({
-      next: 'next',
-      previous: 'previous',
-      switchAuto: 'switchAuto'
-    }),
-    ...mapActions({
-      playOrPause: 'playOrPause'
-    })
+    ...mapMutations(['next', 'previous']),
+    ...mapActions(['playOrPause', 'switchAuto'])
   },
   computed: {
     ...mapState(['serie', 'time', 'playing', 'auto']),
@@ -73,11 +67,6 @@ export default {
         workout__auto: true,
         'workout__auto--active': this.auto
       }
-    }
-  },
-  filters: {
-    unitTime(val) {
-      return new String(val).padStart(2, '0')
     }
   }
 }

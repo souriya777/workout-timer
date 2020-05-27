@@ -1,9 +1,30 @@
 <template>
   <label class="toggle-switch">
-    <input class="toggle-switch__input" type="checkbox" checked />
+    <input
+      :id="id"
+      class="toggle-switch__input"
+      type="checkbox"
+      :checked="checked"
+      @change="$emit('toggle')"
+    />
     <span class="toggle-switch__slider" />
   </label>
 </template>
+<script>
+export default {
+  props: {
+    id: {
+      type: String,
+      required: true
+    },
+    checked: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
+  }
+}
+</script>
 <style lang="stylus">
 .toggle-switch
   position relative
@@ -43,7 +64,7 @@
     background-color color-bg-secondary
 
   &__input:focus + &__slider
-    box-shadow 0 0 1px color-bg-secondary
+    box-shadow 0 0 4px color-bg-secondary
 
   &__input:checked + &__slider:before
     transform: translateX(2.1rem)

@@ -8,13 +8,11 @@
   </nav>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   methods: {
-    ...mapMutations({
-      switchMenu: 'switchMenu'
-    })
+    ...mapActions(['switchMenu'])
   },
   computed: {
     ...mapState(['menuOpened']),

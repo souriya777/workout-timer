@@ -2,29 +2,51 @@
   <div class="edit">
     <form @submit.prevent="save" class="edit__form">
       <div class="edit__group">
-        <label for="" class="edit__label">Nb of series :</label>
+        <label for="edit__nbSerie" class="edit__label">Total series :</label>
         <input
-          class="edit__input"
+          v-model.number="currentNbSerie"
+          id="edit__nbSerie"
+          class="edit__input edit__input--rounded"
           type="number"
           min="1"
           max="100"
-          value="5"
           autofocus
           required
         />
       </div>
       <div class="edit__group">
-        <label for="" class="edit__label">Time :</label>
+        <label for="edit__time-min" class="edit__label">Time :</label>
         <div class="edit__time">
-          <input type="number" min="0" max="59" value="1" required />
-          /
-          <input type="number" min="0" max="59" value="0" required />
+          <input
+            :value="currentMin | unitTime"
+            @input="(e) => (currentMin = e.target.value)"
+            id="edit__time-min"
+            class="edit__input--rounded"
+            type="number"
+            min="0"
+            max="59"
+            required
+          />
+          :
+          <input
+            :value="currentSec | unitTime"
+            @input="(e) => (currentSec = e.target.value)"
+            class="edit__input--rounded"
+            type="number"
+            min="0"
+            max="59"
+            required
+          />
         </div>
       </div>
       <div class="edit__group">
-        <label for="" class="edit__label">Autoplay :</label>
+        <label for="edit__auto" class="edit__label">Autoplay :</label>
         <div class="edit__input">
-          <toggle-switch />
+          <toggle-switch
+            id="edit__auto"
+            :checked="currentAuto"
+            @toggle="currentAuto = !currentAuto"
+          />
         </div>
       </div>
       <input type="submit" />
@@ -32,13 +54,29 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 import ToggleSwitch from '@/components/ToggleSwitch'
 
 export default {
   components: { ToggleSwitch },
+  data() {
+    return {
+      currentNbSerie: this.$store.state.serie[1],
+      currentMin: this.$store.state.refTime[0],
+      currentSec: this.$store.state.refTime[1],
+      currentAuto: this.$store.state.auto
+    }
+  },
   methods: {
+    ...mapActions(['saveSettings']),
     save() {
-      console.log('save')
+      this.saveSettings({
+        nbSerie: this.currentNbSerie,
+        min: this.currentMin,
+        sec: this.currentSec,
+        auto: this.currentAuto
+      })
+      this.$router.push({ name: 'workout' })
     }
   }
 }
@@ -77,6 +115,11 @@ export default {
     display block
     margin 0 auto
     text-align: center
+
+    &--rounded
+      border none
+      border solid .1rem color-bg-input
+      border-radius: .5rem
 
   &__time
     max-width 17rem
