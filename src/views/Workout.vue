@@ -16,11 +16,16 @@
       <div v-if="showPrevious" @click.stop="previous">
         <previous-icon />
       </div>
-      <div v-else>&nbsp;</div>
+      <div v-else class="workout__move--inactive">
+        <previous-icon />
+      </div>
+      <div :class="workoutAutoClass" @click.stop="switchAuto">auto</div>
       <div v-if="showNext" @click.stop="next">
         <next-icon />
       </div>
-      <div v-else>&nbsp;</div>
+      <div v-else class="workout__move--inactive">
+        <next-icon />
+      </div>
     </div>
   </div>
 </template>
@@ -36,14 +41,15 @@ export default {
   methods: {
     ...mapMutations({
       next: 'next',
-      previous: 'previous'
+      previous: 'previous',
+      switchAuto: 'switchAuto'
     }),
     ...mapActions({
       playOrPause: 'playOrPause'
     })
   },
   computed: {
-    ...mapState(['serie', 'time', 'playing']),
+    ...mapState(['serie', 'time', 'playing', 'auto']),
     currentSerie() {
       return this.serie[0]
     },
@@ -61,6 +67,12 @@ export default {
     },
     showNext() {
       return this.currentSerie < this.totalSeries
+    },
+    workoutAutoClass() {
+      return {
+        workout__auto: true,
+        'workout__auto--active': this.auto
+      }
     }
   },
   filters: {
@@ -79,7 +91,7 @@ export default {
   height 100%
   padding 1rem
   background-color #ddd
-  font-size: 10rem
+  font-size 10rem
 
   &__time
     font-weight 600
@@ -89,16 +101,29 @@ export default {
     justify-content center
     width 100%
     &-button
-      display: flex
-      justify-content: center
+      display flex
+      justify-content center
       align-items center
-      height: 12rem
-      width: 12rem
-      border: 0.3rem solid
-      border-radius: 50%
+      height 12rem
+      width 12rem
+      border 0.3rem solid
+      border-radius 50%
 
   &__move
     display flex
     justify-content space-between
+    align-items center
     width 100%
+    &--inactive > svg
+      fill transparent
+
+  &__auto
+    border .1rem solid
+    border-radius .5rem
+    padding 0rem .3rem
+    font-size 1.7rem
+    font-weight 600
+    &--active
+      border .3rem solid
+      background-color alpha(color-bg-primary, .9)
 </style>

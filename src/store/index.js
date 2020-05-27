@@ -3,14 +3,15 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const DEFAULT_MIN = 1
-const DEFAULT_SEC = 0
+const DEFAULT_MIN = 0
+const DEFAULT_SEC = 3
 
 export default new Vuex.Store({
   state: {
     serie: [1, 5],
     time: [DEFAULT_MIN, DEFAULT_SEC],
     playing: false,
+    auto: false,
     menuOpened: false,
     _intervalId: null
   },
@@ -37,8 +38,12 @@ export default new Vuex.Store({
         state.time = [DEFAULT_MIN, DEFAULT_SEC]
       }
     },
+    switchAuto(state) {
+      console.log('switchAuto', state.auto)
+      state.auto = !state.auto
+    },
     tick(state) {
-      const { time, serie, _intervalId } = state
+      const { time, serie, auto, _intervalId } = state
       const [m, s] = time
       const [current, total] = serie
       let newMin = m
@@ -55,6 +60,11 @@ export default new Vuex.Store({
         state.serie = [current + 1, total]
         newMin = DEFAULT_MIN
         newSec = DEFAULT_SEC
+
+        if (!auto) {
+          clearInterval(_intervalId)
+          state.playing = false
+        }
       } else {
         // nominal case
         if (m > 0 && s === 0) {

@@ -39,14 +39,14 @@ y = .6rem
   align-items center
   background-color color-bg-primary
   &__button
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 1.9rem;
-    width: 2.8rem;
-    margin: 2rem;
+    display flex;
+    flex-direction column;
+    justify-content space-between;
+    height 1.9rem;
+    width 2.8rem;
+    margin 2rem;
     &-line
-      height: .3rem;
+      height .3rem;
       background-color color-txt-primary
       transition all animation
     &--opened &-line:nth-child(1)
