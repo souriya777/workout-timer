@@ -2,7 +2,7 @@ var path = require('path')
 
 module.exports = {
   pwa: {
-    name: 'spotify-vuejs'
+    name: 'workout-timer'
   },
   css: {
     loaderOptions: {
