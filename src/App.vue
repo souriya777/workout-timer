@@ -2,6 +2,7 @@
   <div class="app">
     <Nav />
     <Menu />
+    <p>{{ waveLock }}</p>
     <div class="timer">
       <transition name="fade" mode="out-in">
         <router-view />
@@ -15,10 +16,15 @@ import Menu from '@/components/Menu'
 
 export default {
   components: { Nav, Menu },
+  data() {
+    return {
+      waveLock: ''
+    }
+  },
   mounted() {
-    console.log('mounted')
+    console.log('mounted 2 ouf')
     if ('wakeLock' in navigator) {
-      console.log('Screen Wake Lock API supported 🎉')
+      this.waveLock = 'Screen Wake Lock API supported 🎉'
       navigator.wakeLock.request('screen').then(
         function successFunction() {
           console.log('success')
@@ -28,7 +34,7 @@ export default {
         }
       )
     } else {
-      console.log('bad 😭')
+      this.waveLock = 'bad 😭'
     }
   }
 }
