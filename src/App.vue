@@ -10,11 +10,23 @@
   </div>
 </template>
 <script>
+import NoSleep from 'nosleep.js'
 import Nav from '@/components/Nav'
 import Menu from '@/components/Menu'
 
 export default {
-  components: { Nav, Menu }
+  components: { Nav, Menu },
+  mounted() {
+    document.addEventListener(
+      'click',
+      function enableNoSleep() {
+        document.removeEventListener('click', enableNoSleep, false)
+        new NoSleep().enable()
+        console.log('no sleep enable')
+      },
+      false
+    )
+  }
 }
 </script>
 <style lang="stylus">
