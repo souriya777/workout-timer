@@ -16,16 +16,9 @@ import Menu from '@/components/Menu'
 import NoSleep from 'nosleep.js'
 
 export default {
-  data() {
-    return {
-      no: null
-    }
-  },
   components: { Nav, Menu },
   mounted() {
-    const no = new NoSleep()
-    this.nosleep = no
-    no.enable()
+    new NoSleep().enable()
   }
 }
 </script>
