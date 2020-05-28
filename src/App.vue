@@ -42,17 +42,27 @@ h1
   display flex
   flex-direction column
   color color-txt-primary
+
   .nav
     z-index 1
     height height-nav
+    @media screen and (orientation:landscape)
+      height landscape-height-nav
+
   .menu
     position absolute
     top height-nav
     right 0
     height height-content
     width 100%
+      @media screen and (orientation:landscape)
+        height landscape-height-nav
+
   .timer
     height height-content
+    @media screen and (orientation:landscape)
+        height landscape-height-content
+
     > div
       height 100%
       background-color color-bg-secondary

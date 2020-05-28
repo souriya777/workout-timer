@@ -80,6 +80,9 @@ export default {
   padding 1rem
   font-size 10rem
 
+  @media screen and (orientation:landscape)
+    font-size 5rem
+
   &__time
     font-weight 600
 
@@ -97,6 +100,9 @@ export default {
       width 12rem
       border 0.3rem solid
       border-radius 50%
+      @media screen and (orientation:landscape)
+        height 8rem
+        width 8rem
 
   &__move
     display flex
