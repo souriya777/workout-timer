@@ -2,7 +2,7 @@ var path = require('path')
 
 module.exports = {
   pwa: {
-    name: 'workout-timer',
+    name: 'Workout 💪',
     themeColor: '#283593'
   },
   css: {
