@@ -14,7 +14,23 @@ import Nav from '@/components/Nav'
 import Menu from '@/components/Menu'
 
 export default {
-  components: { Nav, Menu }
+  components: { Nav, Menu },
+  mounted() {
+    console.log('mounted')
+    if ('wakeLock' in navigator) {
+      console.log('Screen Wake Lock API supported 🎉')
+      navigator.wakeLock.request('screen').then(
+        function successFunction() {
+          console.log('success')
+        },
+        function errorFunction() {
+          console.log('error')
+        }
+      )
+    } else {
+      console.log('bad 😭')
+    }
+  }
 }
 </script>
 <style lang="stylus">
