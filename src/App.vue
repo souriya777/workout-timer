@@ -13,13 +13,8 @@
 import Nav from '@/components/Nav'
 import Menu from '@/components/Menu'
 
-import NoSleep from 'nosleep.js'
-
 export default {
-  components: { Nav, Menu },
-  mounted() {
-    new NoSleep().enable()
-  }
+  components: { Nav, Menu }
 }
 </script>
 <style lang="stylus">
@@ -60,8 +55,9 @@ h1
     right 0
     height height-content
     width 100%
-      @media screen and (orientation:landscape)
-        height landscape-height-nav
+    @media screen and (orientation:landscape)
+      top landscape-height-nav
+      height landscape-height-content
 
   .timer
     height height-content

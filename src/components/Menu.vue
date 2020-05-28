@@ -81,6 +81,8 @@ animation-txt = ease 50ms
     font-weight 600
     text-align center
     list-style none
+    @media screen and (orientation:landscape)
+      font-size 4rem
 
   &__item
     margin-bottom 4rem
