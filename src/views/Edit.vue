@@ -95,7 +95,7 @@ export default {
 
     > input[type=submit]
       display block
-      margin 7rem auto 0
+      margin 0 auto
       border .1rem solid
       border-radius .5rem
       border-color inherit

@@ -5,7 +5,6 @@ const COUNTDOWN_AUDIO = new Audio(countdown)
 const NEXT_AUDIO = new Audio(nextSound)
 
 export function playCountdown() {
-  console.log('playcountdown')
   COUNTDOWN_AUDIO.play()
 }
 

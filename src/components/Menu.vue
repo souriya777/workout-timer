@@ -4,7 +4,6 @@
     <ul class="menu__list">
       <li class="menu__item" @click="goToWorkout">work 💪</li>
       <li class="menu__item" @click="goToEdit">edit</li>
-      <li class="menu__item" @click="reset">reset</li>
     </ul>
   </div>
 </template>
@@ -20,7 +19,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['switchMenu', 'resetWorkout']),
+    ...mapActions(['switchMenu']),
     goTo(routeName) {
       this.switchMenu()
       // vue-router issue :
@@ -32,10 +31,6 @@ export default {
     },
     goToEdit() {
       this.goTo('edit')
-    },
-    reset() {
-      this.resetWorkout()
-      this.goToWorkout()
     }
   },
   computed: {

@@ -13,18 +13,22 @@
       </div>
     </div>
     <div class="workout__move">
+      <!-- PREVIOUS -->
       <div v-if="showPrevious" @click.stop="previous">
         <previous-icon />
       </div>
       <div v-else class="workout__move--inactive">
         <previous-icon />
       </div>
+      <!-- AUTO -->
       <div :class="workoutAutoClass" @click.stop="switchAuto">auto</div>
+      <!-- NEXT -->
       <div v-if="showNext" @click.stop="next">
         <next-icon />
       </div>
-      <div v-else class="workout__move--inactive">
-        <next-icon />
+      <!-- REFRESH -->
+      <div v-else @click.stop="resetWorkout" class="workout__reset">
+        <spinner-icon />
       </div>
     </div>
   </div>
@@ -35,12 +39,13 @@ import PlayIcon from '@/components/icons/PlayIcon'
 import PauseIcon from '@/components/icons/PauseIcon'
 import PreviousIcon from '@/components/icons/PreviousIcon'
 import NextIcon from '@/components/icons/NextIcon'
+import SpinnerIcon from '@/components/icons/SpinnerIcon'
 
 export default {
-  components: { PlayIcon, PauseIcon, PreviousIcon, NextIcon },
+  components: { PlayIcon, PauseIcon, PreviousIcon, NextIcon, SpinnerIcon },
   methods: {
     ...mapMutations(['next', 'previous']),
-    ...mapActions(['playOrPause', 'switchAuto'])
+    ...mapActions(['playOrPause', 'switchAuto', 'resetWorkout'])
   },
   computed: {
     ...mapState(['serie', 'time', 'playing', 'auto']),
@@ -122,4 +127,13 @@ export default {
     &--active
       border .3rem solid color-action
       color color-txt-secondary
+
+  &__reset
+    display flex
+    justify-content center
+    align-items center
+    width 6rem
+    height 6rem
+    border .1rem solid color-action
+    border-radius 50%
 </style>
