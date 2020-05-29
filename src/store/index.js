@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { DEFAULT_MIN, DEFAULT_SEC } from '@/utils/TimerUtils'
-import { playSecond, playNext } from '../utils/SoundUtils'
+import { playCountdown, playNext } from '../utils/SoundUtils'
 
 Vue.use(Vuex)
 
@@ -79,9 +79,6 @@ export default new Vuex.Store({
         newMin = DEFAULT_MIN
         newSec = DEFAULT_SEC
 
-        // next sound
-        playNext()
-
         // if not autoplay, stop
         if (!auto) {
           clearInterval(_intervalId)
@@ -105,7 +102,7 @@ export default new Vuex.Store({
 
       // 3 second left
       if (m === 0 && s === 4) {
-        playSecond()
+        playCountdown()
       }
     },
     setIntervalId(state, { intervalId }) {
