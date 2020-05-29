@@ -10,22 +10,39 @@
   </div>
 </template>
 <script>
-import NoSleep from 'nosleep.js'
+import { mapState, mapGetters } from 'vuex'
 import Nav from '@/components/Nav'
 import Menu from '@/components/Menu'
+import { NOSLEEP_INSTANCE } from './utils/TimerUtils'
 
 export default {
   components: { Nav, Menu },
-  mounted() {
-    document.addEventListener(
-      'click',
-      function enableNoSleep() {
-        document.removeEventListener('click', enableNoSleep, false)
-        new NoSleep().enable()
-        console.log('no sleep enable')
-      },
-      false
-    )
+  // created() {
+  //   document.addEventListener(
+  //     'click',
+  //     function enableNoSleep() {
+  //       document.removeEventListener('click', enableNoSleep, false)
+  //       NOSLEEP_INSTANCE.enable()
+  //       console.log('nosleep enable 🚀')
+  //     },
+  //     false
+  //   )
+  // },
+  computed: {
+    ...mapState(['playing']),
+    ...mapGetters(['canDisableNosleep'])
+  },
+  watch: {
+    playing(newValue) {
+      if (newValue) {
+        NOSLEEP_INSTANCE.enable()
+        console.log('nosleep enable 🚀')
+      }
+    },
+    canDisableNosleep() {
+      NOSLEEP_INSTANCE.disable()
+      console.log('nosleep disable 😴')
+    }
   }
 }
 </script>

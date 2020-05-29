@@ -16,6 +16,16 @@ export default new Vuex.Store({
     menuOpened: false,
     _intervalId: null
   },
+  getters: {
+    canDisableNosleep({
+      serie: [current, total],
+      time: [m, s],
+      refTime: [m2, s2],
+      auto
+    }) {
+      return current === total || (current > 1 && m === m2 && s === s2 && !auto)
+    }
+  },
   mutations: {
     setCurrentSerie({ serie }, currentSerie) {
       Vue.set(serie, 0, currentSerie)
